@@ -20,8 +20,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class AddStudentFragment extends Fragment {
+import com.example.class3demo2.databinding.FragmentAddStudentBinding;
+import com.example.class3demo2.model.Model;
+import com.example.class3demo2.model.Student;
 
+public class AddStudentFragment extends Fragment {
+    FragmentAddStudentBinding binding;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,21 +48,19 @@ public class AddStudentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_student, container, false);
+        binding = FragmentAddStudentBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
 
-
-        EditText nameEt = view.findViewById(R.id.addstudent_name_et);
-        EditText idEt = view.findViewById(R.id.addstudent_id_et);
-        TextView messageTv = view.findViewById(R.id.addstudent_message);
-        Button saveBtn = view.findViewById(R.id.addstudent_save_btn);
-        Button cancelBtn = view.findViewById(R.id.addstudent_cancell_btn);
-
-        saveBtn.setOnClickListener(view1 -> {
-            String name = nameEt.getText().toString();
-            messageTv.setText(name);
+        binding.saveBtn.setOnClickListener(view1 -> {
+            String name = binding.nameEt.getText().toString();
+            String stId = binding.idEt.getText().toString();
+            Student st = new Student(stId,name,"",false);
+            Model.instance().addStudent(st,()->{
+                Navigation.findNavController(view1).popBackStack();
+            });
         });
 
-        cancelBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack(R.id.studentsListFragment,false));
+        binding.cancellBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack(R.id.studentsListFragment,false));
         return view;
     }
 

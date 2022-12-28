@@ -58,6 +58,10 @@ public class StudentRecyclerAdapter extends RecyclerView.Adapter<StudentViewHold
 
     LayoutInflater inflater;
     List<Student> data;
+    public void setData(List<Student> data){
+        this.data = data;
+        notifyDataSetChanged();
+    }
     public StudentRecyclerAdapter(LayoutInflater inflater, List<Student> data){
         this.inflater = inflater;
         this.data = data;
