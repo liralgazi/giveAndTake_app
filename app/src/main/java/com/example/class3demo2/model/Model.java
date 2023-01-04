@@ -15,6 +15,7 @@ public class Model {
 
     private Executor executor = Executors.newSingleThreadExecutor();
     private Handler mainHandler = HandlerCompat.createAsync(Looper.getMainLooper());
+    private FirebaseModel firebaseModel = new FirebaseModel();
 
     public static Model instance(){
         return _instance;
@@ -27,34 +28,36 @@ public class Model {
         void onComplete(List<Student> data);
     }
     public void getAllStudents(GetAllStudentsListener callback){
-        executor.execute(()->{
-            List<Student> data = localDb.studentDao().getAll();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            mainHandler.post(()->{
-                callback.onComplete(data);
-            });
-        });
+        firebaseModel.getAllStudents(callback);
+//        executor.execute(()->{
+//            List<Student> data = localDb.studentDao().getAll();
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            mainHandler.post(()->{
+//                callback.onComplete(data);
+//            });
+//        });
     }
 
     public interface AddStudentListener{
         void onComplete();
     }
     public void addStudent(Student st, AddStudentListener listener){
-        executor.execute(()->{
-            localDb.studentDao().insertAll(st);
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            mainHandler.post(()->{
-                listener.onComplete();
-            });
-        });
+        firebaseModel.addStudent(st,listener);
+//        executor.execute(()->{
+//            localDb.studentDao().insertAll(st);
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            mainHandler.post(()->{
+//                listener.onComplete();
+//            });
+//        });
     }
 
 
