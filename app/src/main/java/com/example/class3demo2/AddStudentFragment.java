@@ -111,7 +111,7 @@ public class AddStudentFragment extends Fragment {
         });
 
         binding.galleryButton.setOnClickListener(view1->{
-            galleryLauncher.launch("media/*");
+            galleryLauncher.launch("image/*");
         });
         return view;
     }
