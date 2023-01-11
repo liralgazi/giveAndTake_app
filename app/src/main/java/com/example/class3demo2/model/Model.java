@@ -1,5 +1,6 @@
 package com.example.class3demo2.model;
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -16,6 +17,7 @@ public class Model {
     private Executor executor = Executors.newSingleThreadExecutor();
     private Handler mainHandler = HandlerCompat.createAsync(Looper.getMainLooper());
     private FirebaseModel firebaseModel = new FirebaseModel();
+    AppLocalDbRepository localDb = AppLocalDb.getAppDb();
 
     public static Model instance(){
         return _instance;
@@ -23,11 +25,10 @@ public class Model {
     private Model(){
     }
 
-    AppLocalDbRepository localDb = AppLocalDb.getAppDb();
-    public interface GetAllStudentsListener{
-        void onComplete(List<Student> data);
+    public interface Listener<T>{
+        void onComplete(T data);
     }
-    public void getAllStudents(GetAllStudentsListener callback){
+    public void getAllStudents(Listener<List<Student>> callback){
         firebaseModel.getAllStudents(callback);
 //        executor.execute(()->{
 //            List<Student> data = localDb.studentDao().getAll();
@@ -42,10 +43,7 @@ public class Model {
 //        });
     }
 
-    public interface AddStudentListener{
-        void onComplete();
-    }
-    public void addStudent(Student st, AddStudentListener listener){
+    public void addStudent(Student st, Listener<Void> listener){
         firebaseModel.addStudent(st,listener);
 //        executor.execute(()->{
 //            localDb.studentDao().insertAll(st);
@@ -60,5 +58,8 @@ public class Model {
 //        });
     }
 
+    public void uploadImage(String name, Bitmap bitmap,Listener<String> listener) {
+        firebaseModel.uploadImage(name,bitmap,listener);
+    }
 
 }
