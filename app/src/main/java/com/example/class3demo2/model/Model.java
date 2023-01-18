@@ -3,8 +3,11 @@ package com.example.class3demo2.model;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.core.os.HandlerCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,34 +31,57 @@ public class Model {
     public interface Listener<T>{
         void onComplete(T data);
     }
-    public void getAllStudents(Listener<List<Student>> callback){
-        firebaseModel.getAllStudents(callback);
-//        executor.execute(()->{
-//            List<Student> data = localDb.studentDao().getAll();
-//            try {
-//                Thread.sleep(5000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            mainHandler.post(()->{
-//                callback.onComplete(data);
-//            });
-//        });
+
+
+    public enum LoadingState{
+        LOADING,
+        NOT_LOADING
+    }
+    final public MutableLiveData<LoadingState> EventStudentsListLoadingState = new MutableLiveData<LoadingState>(LoadingState.NOT_LOADING);
+
+
+    private LiveData<List<Student>> studentList;
+    public LiveData<List<Student>> getAllStudents() {
+        if(studentList == null){
+            studentList = localDb.studentDao().getAll();
+            refreshAllStudents();
+        }
+        return studentList;
+    }
+
+    public void refreshAllStudents(){
+        EventStudentsListLoadingState.setValue(LoadingState.LOADING);
+        // get local last update
+        Long localLastUpdate = Student.getLocalLastUpdate();
+        // get all updated recorde from firebase since local last update
+        firebaseModel.getAllStudentsSince(localLastUpdate,list->{
+            executor.execute(()->{
+                Log.d("TAG", " firebase return : " + list.size());
+                Long time = localLastUpdate;
+                for(Student st:list){
+                    // insert new records into ROOM
+                    localDb.studentDao().insertAll(st);
+                    if (time < st.getLastUpdated()){
+                        time = st.getLastUpdated();
+                    }
+                }
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                // update local last update
+                Student.setLocalLastUpdate(time);
+                EventStudentsListLoadingState.postValue(LoadingState.NOT_LOADING);
+            });
+        });
     }
 
     public void addStudent(Student st, Listener<Void> listener){
-        firebaseModel.addStudent(st,listener);
-//        executor.execute(()->{
-//            localDb.studentDao().insertAll(st);
-//            try {
-//                Thread.sleep(5000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            mainHandler.post(()->{
-//                listener.onComplete();
-//            });
-//        });
+        firebaseModel.addStudent(st,(Void)->{
+            refreshAllStudents();
+            listener.onComplete(null);
+        });
     }
 
     public void uploadImage(String name, Bitmap bitmap,Listener<String> listener) {
