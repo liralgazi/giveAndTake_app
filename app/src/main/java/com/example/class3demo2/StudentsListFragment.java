@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -18,6 +19,8 @@ import android.view.ViewGroup;
 
 import com.example.class3demo2.databinding.FragmentStudentsListBinding;
 import com.example.class3demo2.model.Model;
+import com.example.class3demo2.model.Movie;
+import com.example.class3demo2.model.MovieModel;
 import com.example.class3demo2.model.Student;
 
 import java.util.LinkedList;
@@ -67,6 +70,14 @@ public class StudentsListFragment extends Fragment {
         binding.swipeRefresh.setOnRefreshListener(()->{
             reloadData();
         });
+
+        LiveData<List<Movie>> data = MovieModel.instance.searchMoviesByTitle("avatar");
+        data.observe(getViewLifecycleOwner(),list->{
+            list.forEach(item->{
+                Log.d("TAG","got movie: " + item.getTitle() + " " + item.getPoster());
+            });
+        });
+
         return view;
     }
 
