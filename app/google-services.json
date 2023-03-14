@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "231381507764",
-    "project_id": "colman-android-2023-67722",
-    "storage_bucket": "colman-android-2023-67722.appspot.com"
+    "project_number": "561317522553",
+    "project_id": "give-and-take-580a6",
+    "storage_bucket": "give-and-take-580a6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:231381507764:android:941209cd702df1f7fe81e1",
+        "mobilesdk_app_id": "1:561317522553:android:6f1b1037b38577862f78a8",
         "android_client_info": {
-          "package_name": "com.example.giveAndTake_app"
+          "package_name": "com.example.giveandtake"
         }
       },
       "oauth_client": [
         {
-          "client_id": "231381507764-0vfh0a6o2cmapc9of3a1qj024006flrl.apps.googleusercontent.com",
+          "client_id": "561317522553-9qnlb9gae1r0oudihgu3ftn7nu5s04fd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBb-y6dq4sTfkzyXfbc-qQMKSurLXE-owE"
+          "current_key": "AIzaSyDqkYrzSO8j5iZn-PJ9FK78ScqCNUvIvLE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "231381507764-0vfh0a6o2cmapc9of3a1qj024006flrl.apps.googleusercontent.com",
+              "client_id": "561317522553-9qnlb9gae1r0oudihgu3ftn7nu5s04fd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
