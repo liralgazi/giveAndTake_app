@@ -2,6 +2,10 @@ package com.example.giveAndTake_app;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -11,11 +15,10 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.example.giveAndTake_app.R;
+import com.example.giveAndTake_app.StudentRecyclerAdapter;
+import com.example.giveAndTake_app.StudentsListFragmentDirections;
+import com.example.giveAndTake_app.StudentsListFragmentViewModel;
 import com.example.giveAndTake_app.databinding.FragmentStudentsListBinding;
 import com.example.giveAndTake_app.model.Model;
 import com.example.giveAndTake_app.model.Movie;
@@ -61,7 +64,7 @@ public class StudentsListFragment extends Fragment {
             adapter.setData(list);
         });
 
-        Model.instance().EventStudentsListLoadingState.observe(getViewLifecycleOwner(),status->{
+        Model.instance().EventStudentsListLoadingState.observe(getViewLifecycleOwner(), status->{
             binding.swipeRefresh.setRefreshing(status == Model.LoadingState.LOADING);
         });
 
