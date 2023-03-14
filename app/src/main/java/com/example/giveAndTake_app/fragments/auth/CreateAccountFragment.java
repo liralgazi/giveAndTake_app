@@ -25,22 +25,22 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginFragment extends Fragment {
+public class CreateAccountFragment extends Fragment {
 
     private EditText emailEt, passwordEt;
     private TextView signUpTv;
     private Button loginBtn;
     private ProgressBar progressBar;
     public static final String EMAIL_REGEX = "^(.+)@(.+)$";
-
     private FirebaseAuth auth;
 
-    public LoginFragment() {
+    public CreateAccountFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
@@ -54,7 +54,7 @@ public class LoginFragment extends Fragment {
         clickListener();
     }
 
-    private void init(View view){
+    private void init(View view) {
         emailEt = view.findViewById(R.id.login_email);
         passwordEt = view.findViewById(R.id.login_password);
         progressBar = view.findViewById(R.id.login_progressBar);
@@ -117,4 +117,6 @@ public class LoginFragment extends Fragment {
         startActivity(new Intent(getContext().getApplicationContext(), MainActivity.class));
         getActivity().finish();
     }
+
+
 }
