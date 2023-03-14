@@ -72,6 +72,7 @@ public class StudentsListFragment extends Fragment {
             reloadData();
         });
 
+
         LiveData<List<Movie>> data = MovieModel.instance.searchMoviesByTitle("avatar");
         data.observe(getViewLifecycleOwner(),list->{
             list.forEach(item->{
