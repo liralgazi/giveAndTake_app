@@ -1,10 +1,10 @@
-package com.example.class3demo2.model;
+package com.example.giveAndTake_app.model;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.class3demo2.MyApplication;
+import com.example.giveAndTake_app.MyApplication;
 
 @Database(entities = {Student.class}, version = 80)
 abstract class AppLocalDbRepository extends RoomDatabase {

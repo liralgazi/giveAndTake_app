@@ -1,4 +1,4 @@
-package com.example.class3demo2;
+package com.example.giveAndTake_app;
 
 import android.os.Bundle;
 

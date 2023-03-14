@@ -1,4 +1,4 @@
-package com.example.class3demo2;
+package com.example.giveAndTake_app;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -10,11 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 
-import com.example.class3demo2.databinding.FragmentAboutBinding;
-
-import java.util.zip.Inflater;
+import com.example.giveAndTake_app.databinding.FragmentAboutBinding;
 
 
 public class AboutFragment extends Fragment {

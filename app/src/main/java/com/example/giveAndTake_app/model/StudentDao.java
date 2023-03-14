@@ -1,4 +1,4 @@
-package com.example.class3demo2.model;
+package com.example.giveAndTake_app.model;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

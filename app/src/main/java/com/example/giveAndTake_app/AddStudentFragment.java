@@ -1,6 +1,5 @@
-package com.example.class3demo2;
+package com.example.giveAndTake_app;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -23,13 +22,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.example.class3demo2.databinding.FragmentAddStudentBinding;
-import com.example.class3demo2.model.Model;
-import com.example.class3demo2.model.Student;
+import com.example.giveAndTake_app.databinding.FragmentAddStudentBinding;
+import com.example.giveAndTake_app.model.Model;
+import com.example.giveAndTake_app.model.Student;
 
 public class AddStudentFragment extends Fragment {
     FragmentAddStudentBinding binding;
