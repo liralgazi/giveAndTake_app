@@ -91,7 +91,6 @@ public class LoginFragment extends Fragment {
                             }
                             sendUserToMainActivity();
 
-
                         } else {
                             String exception = task.getException().getMessage();
                             Toast.makeText(getContext(), "Error: " + exception, Toast.LENGTH_SHORT).show();
