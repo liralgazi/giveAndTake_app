@@ -16,7 +16,6 @@ public class AuthReplacerActivity extends AppCompatActivity {
 
     private FrameLayout frameLayout;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,7 @@ public class AuthReplacerActivity extends AppCompatActivity {
 
         frameLayout = findViewById(R.id.replace_frameLayout);
 
-        setFragment(new CreateAccountFragment());
+        setFragment(new LoginFragment());
     }
 
     public void setFragment(Fragment fragment){

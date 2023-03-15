@@ -26,6 +26,7 @@ public class Student {
 
     public Student(){
     }
+
     public Student( String id,String name, String avatarUrl, Boolean cb) {
         this.name = name;
         this.id = id;
